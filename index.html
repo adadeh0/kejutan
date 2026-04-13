@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klik Untuk Hadiah</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        #trigger-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #scare-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+        }
+
+        #scare-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="trigger-btn">KLIK UNTUK LIHAT KEJUTAN! 🎁</button>
+
+    <div id="scare-container">
+        <img id="scare-image" src="" alt="Jumpscare">
+    </div>
+
+    <audio id="scare-sound" src=""></audio>
+
+    <script>
+        const btn = document.getElementById('trigger-btn');
+        const container = document.getElementById('scare-container');
+        const sound = document.getElementById('scare-sound');
+        const img = document.getElementById('scare-image');
+
+        // GANTI URL DI BAWAH INI
+        const URL_FOTO = "foto.jpg"; // Contoh foto seram
+        const URL_LAGU = "lagu.mp3"; // Contoh suara teriakan
+
+        btn.addEventListener('click', () => {
+            // Set sumber konten
+            img.src = URL_FOTO;
+            sound.src = URL_LAGU;
+
+            // Tampilkan gambar & putar suara
+            container.style.display = 'block';
+            sound.play();
+
+            // Opsional: Buat layar bergetar
+            img.animate([
+                { transform: 'translate(1px, 1px) rotate(0deg)' },
+                { transform: 'translate(-1px, -2px) rotate(-1deg)' },
+                { transform: 'translate(-3px, 0px) rotate(1deg)' },
+                { transform: 'translate(3px, 2px) rotate(0deg)' }
+            ], {
+                duration: 100,
+                iterations: Infinity
+            });
+        });
+    </script>
+</body>
+</html>
